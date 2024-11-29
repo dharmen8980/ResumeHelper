@@ -1,6 +1,17 @@
 "use server";
 
-import { Document, Paragraph, TextRun, AlignmentType, TabStopType, TabStopPosition, BorderStyle, Packer } from "docx";
+import {
+  Document,
+  Paragraph,
+  TextRun,
+  AlignmentType,
+  TabStopType,
+  TabStopPosition,
+  BorderStyle,
+  Packer,
+  UnderlineType,
+  NumberFormat,
+} from "docx";
 import { format } from "date-fns";
 
 // Types for resume data
@@ -73,7 +84,7 @@ const createSectionHeader = (text: string) => {
     children: [
       new TextRun({
         text,
-        underline: true,
+        underline: { type: UnderlineType.SINGLE },
         bold: true,
         size: 22, // Font size 11
       }),
@@ -116,19 +127,16 @@ export async function generateResume(resumeData: ResumeData): Promise<Uint8Array
   const numbering = {
     config: [
       {
-        reference: "bullet-list",
         levels: [
           {
             level: 0,
-            format: "bullet",
+            format: NumberFormat.BULLET,
             text: "•",
-            alignment: "left",
-            style: {
-              font: "Arial",
-            },
-            size: 22, // Font size 11
+            alignment: AlignmentType.LEFT,
           },
         ],
+        reference: "bullet-list",
+        size: 22,
       },
     ],
   };

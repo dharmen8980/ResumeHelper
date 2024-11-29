@@ -95,6 +95,7 @@ export default function ResumeForm() {
 
       if (subField) {
         // Add to a sublist (e.g., responsibilities or achievements)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const sublist = (newData.sections[section][index] as any)[subField];
         if (Array.isArray(sublist)) {
           sublist.push(""); // Add a single empty item to the sublist
@@ -121,6 +122,7 @@ export default function ResumeForm() {
     setFormData((prev) => {
       const newData = { ...prev };
       if (subField !== undefined && subIndex !== undefined) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const items = (newData.sections[section][index] as any)[subField];
         if (items.length > 1) {
           items.splice(subIndex, 1);
